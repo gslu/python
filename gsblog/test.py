@@ -1,2 +1,1 @@
-import smtplib
-import shutil
+import sys
