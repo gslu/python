@@ -3,7 +3,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 
-#¶à¸öargsÊ±ÊÇ°´ÕÕaddµÄË³ĞòÇø·Ö£¬kwargsÊÇ¸ù¾İÍ¬Ê±ÓĞ-ºÍ--Ê±£¬Ê¹ÓÃ--ºó±êÊ¶Ê¶±ğ
+# å¤šä¸ªargsæ—¶æ˜¯æŒ‰ç…§addçš„é¡ºåºåŒºåˆ†ï¼Œkwargsæ˜¯æ ¹æ®åŒæ—¶æœ‰-å’Œ--æ—¶ï¼Œä½¿ç”¨--åæ ‡è¯†è¯†åˆ«
 parser.add_argument("file",type=str,help="png file")
 parser.add_argument("other")
 
@@ -11,12 +11,12 @@ parser.add_argument("-o","--output",type=str,help="output file")
 parser.add_argument("--weight",type=int,default=80)
 parser.add_argument("-k",type=int,default=800)
 
-#nargs: µ±Ñ¡Ïîºó½ÓÊÜ¶à¸ö»òÕß0¸ö²ÎÊıÊ±ĞèÒªÕâ¸öÀ´Ö¸¶¨
+# nargs: å½“é€‰é¡¹åæ¥å—å¤šä¸ªæˆ–è€…0ä¸ªå‚æ•°æ—¶éœ€è¦è¿™ä¸ªæ¥æŒ‡å®š
 parser.add_argument("-u",nargs=2)
 
-#µ±Ñ¡Ïî½ÓÊÜ1¸ö»òÕß²»ĞèÒª²ÎÊıÊ±Ö¸¶¨nargs=¡¯?',
-# µ±Ã»ÓĞ²ÎÊıÊ±£¬»á´ÓdefaultÖĞÈ¡Öµ¡£¶ÔÓÚÑ¡Ïî²ÎÊıÓĞÒ»¸ö¶îÍâµÄÇé¿ö£¬
-# ¾ÍÊÇ³öÏÖÑ¡Ïî¶øºóÃæÃ»ÓĞ¸ú¾ßÌå²ÎÊı£¬ÄÇÃ´»á´ÓconstÖĞÈ¡Öµ
+# å½“é€‰é¡¹æ¥å—1ä¸ªæˆ–è€…ä¸éœ€è¦å‚æ•°æ—¶æŒ‡å®šnargs=â€™?',
+# å½“æ²¡æœ‰å‚æ•°æ—¶ï¼Œä¼šä»defaultä¸­å–å€¼ã€‚å¯¹äºé€‰é¡¹å‚æ•°æœ‰ä¸€ä¸ªé¢å¤–çš„æƒ…å†µï¼Œ
+# å°±æ˜¯å‡ºç°é€‰é¡¹è€Œåé¢æ²¡æœ‰è·Ÿå…·ä½“å‚æ•°ï¼Œé‚£ä¹ˆä¼šä»constä¸­å–å€¼
 parser.add_argument("-a",nargs='?',default='d',const='s')
 
 args = parser.parse_args('-u s1 s2 -o outfile file.txt otherfile'.split())
