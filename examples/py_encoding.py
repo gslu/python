@@ -1,4 +1,5 @@
-mport sys
+#coding:utf-8
+import sys
 import chardet
 
 #ÏµÍ³Ä¬ÈÏ±àÂë

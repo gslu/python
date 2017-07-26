@@ -1,4 +1,5 @@
-mport cPickle
+#coding:utf-8
+import cPickle
 
 #对象序列化，持久化
 
