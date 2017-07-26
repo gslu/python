@@ -1,7 +1,7 @@
 #coding:utf-8
 import cPickle
 
-#¶ÔÏóĞòÁĞ»¯
+# å¯¹è±¡åºåˆ—åŒ–ï¼ŒæŒä¹…åŒ–
 
 def my_func(arg):
     '''
