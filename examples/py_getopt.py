@@ -3,14 +3,14 @@ import getopt
 import sys
 argv = sys.argv
 
-#filename= f: g: ±íÊ¾ºóÃæ´øÒ»¸ö²ÎÊýÖµ£¬
-# h --help±íÊ¾¿ª¹Ø£¬²»´ø²ÎÊý¡¡
-# filename= ±íÊ¾¡¡--filename ºó´ø²ÎÊý
+# filename= f: g: è¡¨ç¤ºåŽé¢å¸¦ä¸€ä¸ªå‚æ•°å€¼ï¼Œ
+# h --helpè¡¨ç¤ºå¼€å…³ï¼Œä¸å¸¦å‚æ•°ã€€
+# filename= è¡¨ç¤ºã€€--filename åŽå¸¦å‚æ•°
 arg = getopt.getopt(argv[1:],"f:g:h",["help","filename="])
 
 print arg
 '''
-Èç£º
+å¦‚ï¼š
 $ python py_getopt.py -f file01 -g something -h --help --filename filename otherarg
 
 ([('-f', 'file01'), ('-g', 'something'), ('-h', ''), ('--help', ''), ('--filename', 'filename')], ['otherarg'])
