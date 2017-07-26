@@ -2,32 +2,32 @@
 import sys
 import chardet
 
-#ÏµÍ³Ä¬ÈÏ±àÂë
+# ç³»ç»Ÿé»˜è®¤ç¼–ç 
 print sys.getdefaultencoding()
 
-#ÏµÍ³ÖĞÎÄ±àÂë
+# ç³»ç»Ÿä¸­æ–‡ç¼–ç 
 # echo $LANG
 
-#decode½âÂë£¬encode±àÂë,unicode×÷ÎªÖĞ¼äÂë¡¡decode --> unicode -->encode
+# decodeè§£ç ï¼Œencodeç¼–ç ,unicodeä½œä¸ºä¸­é—´ç ã€€decode --> unicode -->encode
 
-string = "¸¨µ¼ÊéÁ´½Ó"
+string = "è¾…å¯¼ä¹¦é“¾æ¥"
 print type(string)
 
-#str to unicode
+# str to unicode
 s2=string.decode("utf-8")
 print type(s2)
 
-#unicode to gbk
+# unicode to gbk
 s3=s2.encode("gbk")
 print type(s3)
 
-#gbk to unicode
+# gbk to unicode
 s4=s3.decode("gbk")
 print type(s4)
 
 print string,s2,s3,s4
 
-#²é¿´·ÇunicodeµÄ×Ö·û±àÂë
+# æŸ¥çœ‹éunicodeçš„å­—ç¬¦ç¼–ç 
 print chardet.detect(string)
 print chardet.detect(s3)
 
