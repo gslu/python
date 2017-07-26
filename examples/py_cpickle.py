@@ -1,7 +1,7 @@
 #coding:utf-8
 import cPickle
 
-#对象序列化，持久化
+#对象序列化
 
 def my_func(arg):
     '''
