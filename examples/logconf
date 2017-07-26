@@ -1,0 +1,79 @@
+# 定义记录器　logger模块，root是父类，必需存在的，其它的是自定义。
+# logging.getLogger(NAME)便相当于向logging模块注册了一种日志打印
+[loggers]
+keys=root,lgtest03
+
+[logger_root]
+level=INFO
+qualname = root
+handlers=handler01,handler02
+
+#--------------------------------------------------
+# 实现上面定义的logger模块，必需是[logger_xxxx]这样的形式
+#--------------------------------------------------
+# [logger_xxxx] logger_模块名称
+# level     级别，级别有DEBUG、INFO、WARNING、ERROR、CRITICAL
+# handlers  处理类，可以有多个，用逗号分开
+# qualname  logger名称，应用程序通过 logging.getLogger获取。对于不能获取的名称，则记录到root模块。
+# propagate 是否继承父类的log信息，0:否 1:是
+
+[logger_lgtest03]
+level=DEBUG
+qualname=lgtest03
+handlers=handler01,handler02
+propagate=0
+
+# 定义处理器handler
+[handlers]
+keys=handler01,handler02
+
+#--------------------------------------------------
+# handler
+#--------------------------------------------------
+# [handler_xxxx]
+# class handler类名
+# level 日志级别
+# formatter，上面定义的formatter
+# args handler初始化函数参数
+
+[handler_handler01]
+class=StreamHandler
+level=WARN
+formatter=form01
+args=(sys.stderr,)
+
+[handler_handler02]
+class=FileHandler
+level=INFO
+formatter=form02
+args=('./log/test03.log','a')
+
+# 定义格式化输出
+[formatters]
+keys=form01,form02
+
+#--------------------------------------------------
+# 日志格式
+#--------------------------------------------------
+# %(name)s          logger名
+# %(asctime)s       年-月-日 时-分-秒,毫秒 2013-04-26 20:10:43,745
+# %(filename)s      文件名，不含目录
+# %(pathname)s      目录名，完整路径
+# %(funcName)s      函数名
+# %(levelname)s     级别名
+# %(lineno)d        行号
+# %(module)s        模块名
+# %(message)s       消息体
+# %(name)s          日志模块名
+# %(process)d       进程id
+# %(processName)s   进程名
+# %(thread)d        线程id
+# %(threadName)s    线程名
+
+[formatter_form01]
+format=%(asctime)s %(filename)s [line:%(lineno)d] %(name)s %(levelname)s:%(message)s
+datefmt=%H:%M:%S
+
+[formatter_form02]
+format=%(asctime)s %(filename)s [line:%(lineno)d] %(name)s %(levelname)s:%(message)s
+datefmt=%Y-%m-%d %H:%M:%S
