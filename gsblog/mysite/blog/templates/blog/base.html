@@ -1,0 +1,36 @@
+{% load blog_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>{% block title %}{% endblock %}</title>
+        <link href= '{% static "blog/css/base.css" %}' rel="stylesheet">
+        <link href= '{% static "blog/css/forms.css" %}' rel="stylesheet">
+
+    </head>
+    <body>
+            {% block nav %}
+                {% include "blog/nav.html" with user=user %}
+            {% endblock %}
+
+            {% block header %}
+            <div class="home-page">
+                {% include "blog/header.html" %}
+            </div>
+            {% endblock %}
+
+            {% block content %}
+            {% endblock %}
+
+
+            {% block sidebar %}
+            {% endblock %}
+
+
+            {% block footer %}
+                {% include "blog/footer.html" %}
+            {% endblock %}
+
+    </body>
+</html>
