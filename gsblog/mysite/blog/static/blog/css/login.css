@@ -1,78 +1,117 @@
 /* LOGIN FORM */
 
 body.login {
-    background: #f8f8f8;
+    background: #F2F2F2;
 }
 
-.login #header {
-    height: auto;
-    padding: 5px 16px;
+.login #text {
+    float:top;
+    margin:0px auto;
+    width:350px;
+    background-color:#F2F2F2;
+    text-align:center;
 }
 
-.login #header h1 {
-    font-size: 18px;
+.login #login-form,
+.login #register-form
+ {
+    margin:15px auto;
+    padding-top:30px;
+    padding-bottom:170px;
+    text-align:center;
+    width:350px;
+    height:350px;
+    background-color:#FFFFF0;
+    border-radius:8px;
 }
 
-.login #header h1 a {
-    color: #fff;
+#login-form #form-desc,
+#register-form #form-desc
+ {
+    line-height:100px;
+    font-size:20px;
+
 }
 
-.login #content {
-    padding: 20px 20px 0;
+#login-form label,
+#register-form label
+{
+    font-size:16px;
 }
 
-.login #container {
-    background: #fff;
-    border: 1px solid #eaeaea;
-    border-radius: 4px;
-    overflow: hidden;
-    width: 28em;
-    min-width: 300px;
-    margin: 100px auto;
+#form-desc a
+{
+    color:gray;
 }
 
-.login #content-main {
-    width: 100%;
+#login-form #type-login
+{
+    color:#B22222
 }
 
-.login .form-row {
-    padding: 4px 0;
-    float: left;
-    width: 100%;
-    border-bottom: none;
+#register-form #type-reg{
+    color:#B22222
 }
 
-.login .form-row label {
-    padding-right: 0.5em;
-    line-height: 2em;
-    font-size: 1em;
+#form-desc a:focus,
+#form-desc a:hover
+{
+    color:#B22222
+}
+
+.login #footer {
     clear: both;
-    color: #333;
-}
-
-.login .form-row #id_username, .login .form-row #id_password {
-    clear: both;
-    padding: 8px;
-    width: 100%;
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
-}
-
-.login span.help {
-    font-size: 10px;
     display: block;
-}
-
-.login .submit-row {
-    clear: both;
-    padding: 1em 0 0 9.4em;
-    margin: 0;
-    border: none;
-    background: none;
-    text-align: left;
-}
-
-.login .password-reset-link {
+    padding:15px;
     text-align: center;
+    margin: 0px auto;
+    position: relative;
+    background-color:#F2F2F2;
+}
+
+
+#text a{
+    font-size:50px;
+    color:#FF6347;
+}
+
+
+.login #login-error,
+.login #register_msg
+{
+    font-size:13px;
+    color:red;
+}
+
+.login #login-success{
+    font-size:13px;
+    color:green;
+}
+
+#login-form input[type="text"],#register-form input[type="text"],
+#login-form input[type="password"],#register-form input[type="password"]
+{
+    padding: 10px 15px;
+    font-size:15px;
+    margin:4px;
+}
+
+
+#register-form #reg-submit
+{
+    background:#43CD80;
+    color:#FFFFFF;
+}
+
+
+#register-form #reg-submit:focus,
+#register-form #reg-submit:hover
+{
+    background:#3CB371;
+}
+
+
+#register-form #reg-submit:active
+{
+    background:#458B74;
 }

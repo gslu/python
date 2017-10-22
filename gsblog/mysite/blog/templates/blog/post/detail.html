@@ -15,19 +15,7 @@
             Published {{ post.publish }} by {{ post.author }}
         </p>
 
-        <script type="text/javascript">
-            var $ = function(id){
-                return document.getElementById(id);
-            };
-            function httpHtml(){
-                var v = $("post-body").value;
-                var reg = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
-                v = v.replace(reg, "<a href='$1$2'>$1$2</a>").replace(/\n/g, "<br />");
-                $("post-body").innerHTML = v;
-            }
-        </script>
-
-        <div id="post-body" onload="httpHtml()">
+        <div id="post-body">
             {{ post.body|linebreaks }}
         </div>
         <br/>

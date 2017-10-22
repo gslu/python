@@ -42,7 +42,8 @@ class Post(models.Model):
                        args=[self.publish.year,
                              self.publish.strftime('%m'),
                              self.publish.strftime('%d'),
-                             self.slug])
+                             self.slug,
+                             self.id])
 
 
 class Comment(models.Model):

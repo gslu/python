@@ -1,14 +1,22 @@
 {% load static %}
 <div id="nav">
+    <div id="logo">
+        <img src='{% static "blog/img/1508593747_779643.png"%}'>
+    </div>
+    <div id="nav-user">
     {% if user.is_authenticated %}
-        <a id="user" href="">{{ user }}</a>
+        <a id="user" href="">{{ user|title }}</a>
         <a id="center" href="">个人中心</a>
-        <button id="logout" name="logout" onclick="javascrtpt:window.location.href='{% url 'blog:logout' %}'">
+        <button id="logout" name="logout" onclick="javascrtpt:window.location.href='{% url 'blog:user_logout' %}'">
             注销
         </button>
     {% else %}
-        <button id="login" name="login" onclick="javascrtpt:window.location.href='{% url 'blog:login' %}'">
-            登录
+        <button id="login" name="login" onclick="javascrtpt:window.location.href='{% url 'blog:user_login' %}'">
+            你好,请登录
+        </button>
+        <button id="register" name="register" onclick="javascrtpt:window.location.href='{% url 'blog:user_register' %}'">
+            注册
         </button>
     {% endif %}
+    </div>
 </div>

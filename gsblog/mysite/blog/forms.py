@@ -13,7 +13,16 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('name','email','body')
 
+
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=40,min_length=3,label=u"帐号")
     password = forms.CharField(widget=forms.PasswordInput,label=u"密码")
+
+
+class RegisterForm(forms.Form):
+    username = forms.CharField(max_length=40,min_length=3,label=u"帐号")
+    phone = forms.CharField(max_length=20, label=u"手机")
+    password = forms.CharField(widget=forms.PasswordInput,label=u"密码")
+
+
 

@@ -1,28 +1,32 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, EmptyPage,PageNotAnInteger
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
 from django.views.generic import ListView
 from django.db.models import Count
 from taggit.models import Tag
 from .models import Post,Comment
-from .forms import EmailPostForm,CommentForm,LoginForm
+from .forms import EmailPostForm,CommentForm,LoginForm,RegisterForm
+
 
 # Create your views here.
 
 
-def login_user(request):
+def userLogin(request):
 
     login_status = None
     if request.method == 'POST':
 
-        login_form = LoginForm(request.POST)
-        if login_form.is_valid():
-            cd = login_form.cleaned_data
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
             user = authenticate(username=cd["username"], password=cd["password"])
             if user is not None:
                 login(request, user)
@@ -30,20 +34,61 @@ def login_user(request):
                 return HttpResponseRedirect(request.META.get('REFERER', '/'))
             else:
                 login_status = 400
-                login_form = LoginForm(initial={"username": cd["username"],
+                form = LoginForm(initial={"username": cd["username"],
                                                 "password": cd["password"]})
 
     else:
-        login_form = LoginForm()
+        form = LoginForm()
 
 
-    return render(request,"blog/login.html",{"login_form":login_form,
-                                             "login_status":login_status})
+    return render(request,"blog/login.html",{"form":form,
+                                             "login_status":login_status,
+                                             "type":"login"})
 
 
-def logout_user(request):
+def userLogout(request):
     logout(request)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+
+def userRegister(request):
+
+    register_msg = None
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+
+            try:
+                user = User.objects.get(username=cd["username"])
+            except:
+                user = None
+
+            if user is None:
+                try:
+                    User.objects.create(username=cd["username"],
+                                        password=make_password(cd["password"],None,"pbkdf2_sha256"))
+                except Exception as e:
+                    if settings.DEBUG:
+                        register_msg = e.message
+                    else:
+                        register_msg = "Server error"
+                else:
+                    return HttpResponseRedirect(request.META.get('REFERER', '/'))
+            else:
+                register_msg="该帐号已被注册"
+                form = RegisterForm(initial={"username": cd["username"],
+                                                "password": cd["password"],
+                                                 "phone":cd["phone"]})
+
+    else:
+        form = RegisterForm()
+
+
+    return render(request,"blog/login.html",{"form":form,
+                                             "register_msg":register_msg,
+                                             "type": "register"})
+
 
 
 class PostListView(ListView):
@@ -74,10 +119,11 @@ def post_list(request,tag_slug=None):
                                                  'tag':tag,
                                                  'user':request.user})
 
-def post_detail(request, year, month, day, post):
-    post = get_object_or_404(Post, slug=post,status='published',publish__year=year
-                                    #publish__month=month, #不识别month,day
-                                    #publish__day=day
+def post_detail(request,year,month,day,slug,id):
+    post = get_object_or_404(Post, slug=slug,status='published',publish__year=year,
+                                    publish__month=month, #要setting设置USE_TZ=False,否则不识别month,day
+                                    publish__day=day,
+                                    id=id
                                 )
     if post:
         post.accesstimes += 1
@@ -142,6 +188,6 @@ def post_share(request,post_id):
     return render(request,'blog/post/share.html',{'form':form,'post':post,'sent':sent,'cd':cd})
 
 
-def music(request,blogger=None):
+def music(request):
     return render(request,'blog/music/music.html',{})
 
