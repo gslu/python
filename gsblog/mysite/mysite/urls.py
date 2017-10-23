@@ -22,7 +22,7 @@ from django.views.generic.base import RedirectView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^blog/$',RedirectView.as_view(url="/"),name="index"),
+    #url(r'^blog/$',RedirectView.as_view(url="/"),name="index"),
     url(r'^', include('blog.urls',namespace='blog',app_name='blog')),
 ]
 if settings.DEBUG:

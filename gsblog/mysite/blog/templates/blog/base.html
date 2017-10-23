@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="icon" href='{% static "media/image/picture.ico" %}' type="image/x-icon"/>
+        <link rel="icon" href='{% static "blog/img/icon-title.ico" %}' type="image/x-icon"/>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>{% block title %}{% endblock %}</title>
         <link href= '{% static "blog/css/base.css" %}' rel="stylesheet">
@@ -21,13 +21,13 @@
     </head>
     <body onload="httpHtml()">
             {% block nav %}
-                {% include "blog/nav.html" with user=user %}
+                {% include "blog/nav.html" with auth_user=auth_user %}
             {% endblock %}
 
             <div class="body">
                 {% block header %}
                 <div class="home-page">
-                    {% include "blog/header.html" %}
+                    {% include "blog/header.html" with user=user %}
                 </div>
                 {% endblock %}
 
@@ -39,7 +39,7 @@
                     {% block sidebar %}
                     {% endblock %}
                 </div>
-            </div>>
+            </div>
 
             {% block footer %}
                 {% include "blog/footer.html" %}

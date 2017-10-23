@@ -1,9 +1,9 @@
 {% extends "blog/post/base.html" %}
-{% block title %}Share a post{% endblock %}
+{% block title %}Share {{ post.title }}{% endblock %}
 
 {% block header %}
 <div class="share-page">
-    {% include "blog/header.html" %}
+    {% include "blog/header.html" with user=user %}
 </div>
 
 {% endblock %}

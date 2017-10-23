@@ -353,17 +353,17 @@ div.body{
 
 #header {
     float:top;
-    /*add width height*/
     width:1020px;
     height:230px;
     margin:0px auto;
     padding-bottom:10px;
-    /*margin:4% 10% 0 10%;*/
-    background: #BEBEBE;
     line-height:100px;
     overflow: hidden;
     border:0px solid;
     border-radius:12px;
+    background: #BEBEBE;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 
 #header h1{
@@ -378,7 +378,6 @@ div.body{
     font-family:PMingLiU;
     font-weight:500;
     color:#363636;
-
 }
 
 #header a{
@@ -499,55 +498,83 @@ div.body{
 
 #nav #nav-user{
     float:right;
-    height:100%;
-    line-height:200%;
-    margin-right:30px;
+    height:50px;
+    line-height:50px;
+    overflow:hidden;
+    margin-right:50px;
+    /*vertical-align:middle;*/
 }
 
-#nav a{
-    margin:10px;
+#nav-user #user-center{
+    float:left;
+    height:50px;
+    line-height:50px;
+    overflow:hidden;
+    margin-right:30px;
+    /*vertical-align:middle;*/
+}
+
+#user-center a{
+    margin-right:20px;
 }
 
 /*vertical-align:middle;*/
 
-#nav-user button{
-    height:80%;
-    line-height:100%;
-    padding-left:25px;
-    padding-right:25px;
-    margin:5px 10px;
+#nav-user #login,
+#nav-user #logout,
+#nav-user #register
+{
+    height:40px;
+    line-height:40px;
+    width:auto;
+    padding-left:20px;
+    padding-right:20px;
     font-size:15px;
+    margin-top:5px;
     border-radius:15px;
-    border:none;
     background: #FAFAFA;
     color:#104E8B;
 }
 
 #nav-user #register
 {
+    float:right;
     border:1px solid;
     border-color: #EE9572;
     background:#F0FFF0;
 }
 
+#nav-user #login
+{
+    float:left;
+    margin-right:30px;
+}
 
-#nav button:focus,
-#nav button:hover
+#nav-user #logout
+{
+    float:right;
+}
+
+
+#nav-user #logout:focus,#nav-user #logout:hover,
+#nav-user #login:focus,#nav-user #login:hover
 {
     background: #87CEFF;
     color:#2F4F4F;
 }
 
-
-#nav #register:focus,
-#nav #register:hover{
+#nav-user #register:focus,
+#nav-user #register:hover
+{
     background: #9AFF9A;
     color:#2F4F4F;
 }
 
 
 #nav #register:active,
-#nav button:active{
+#nav login:active,
+#nav logout:active
+{
     background: #6CA6CD;
     color:#2F4F4F;
 }
@@ -575,6 +602,11 @@ div.post-list, div.post-detail, div.post-share {
     border-radius:8px;
 }
 
+#empty-page{
+    height:200px;
+    text-align:center;
+}
+
 
 div.comment-form{
     background-color:#F5F5DC;
@@ -588,7 +620,7 @@ div.comment-form h2{
 }
 
 div.owner-img{
-    margin:10px auto;
+    margin:0px auto;
     width: 220px;
     height: 220px;
     border: 0px solid;

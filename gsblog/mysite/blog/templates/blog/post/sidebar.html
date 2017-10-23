@@ -2,17 +2,21 @@
 {% load static %}
 <div id="sidebar">
     <div class="owner-img">
-        <a href='{% url "blog:post_list" %}'>
-        <img src='{% static "media/image/city.jpg" %}'>
+        <a href='{% url "blog:post_list" user.id %}'>
+    {% if user.profile.image %}
+        <img src="{{ MEDIA_URL }}{{ user.profile.image }}">
+    {% else %}
+        <img src='{% static "blog/img/user_default.jpeg" %}'>
+    {% endif %}
         </a>
     </div>
 
-    <h2 id="blogger">浮光掠影</h2>
+    <h2 id="blogger">{{ user.profile.nickname }}</h2>
     <hr/><br/>
-    <p>This is my blog.I have written {% total_posts %} posts so far.</p>
+    <p>已发布的文章 {% total_posts user %} </p>
 
-    <h3>Latest posts</h3>
-    {% get_latest_posts 3 as latest_posts %}
+    <h3>最新文章</h3>
+    {% get_latest_posts user 4 as latest_posts %}
     <ul>
         {% for post in latest_posts %}
         <li>
@@ -20,9 +24,9 @@
         </li>
         {% endfor %}
     </ul>
-
-    <h3>Most access</h3>
-    {% get_most_access_posts 3 as most_access_posts %}
+<!--
+    <h3>按浏览</h3>
+    {% get_most_access_posts user 3 as most_access_posts %}
     <ul>
         {% for post in most_access_posts %}
         <li>
@@ -31,8 +35,8 @@
         {% endfor %}
     </ul>
 
-    <h3>Most commented posts</h3>
-    {% get_most_commented_posts 3 as most_commented_posts %}
+    <h3>按评论</h3>
+    {% get_most_commented_posts user 3 as most_commented_posts %}
     <ul>
         {% for post in most_commented_posts %}
         <li>
@@ -40,4 +44,5 @@
         </li>
         {% endfor %}
     </ul>
+-->
 </div>

@@ -6,7 +6,7 @@ body.login {
 
 .login #text {
     float:top;
-    margin:0% auto;
+    margin:0px auto;
     width:350px;
     background-color:#F2F2F2;
     text-align:center;
@@ -15,7 +15,7 @@ body.login {
 .login #login-form,
 .login #register-form
  {
-    margin:1% auto;
+    margin:15px auto;
     padding-top:30px;
     padding-bottom:170px;
     text-align:center;

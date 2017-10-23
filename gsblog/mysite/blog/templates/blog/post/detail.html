@@ -1,9 +1,10 @@
 {% extends "blog/post/base.html" %}
+
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block header %}
 <div class="detail-page">
-    {% include "blog/header.html" %}
+    {% include "blog/header.html" with user=user %}
 </div>
 {% endblock %}
 

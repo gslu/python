@@ -4,19 +4,31 @@
         <img src='{% static "blog/img/1508593747_779643.png"%}'>
     </div>
     <div id="nav-user">
-    {% if user.is_authenticated %}
-        <a id="user" href="">{{ user|title }}</a>
-        <a id="center" href="">个人中心</a>
-        <button id="logout" name="logout" onclick="javascrtpt:window.location.href='{% url 'blog:user_logout' %}'">
-            注销
-        </button>
+    {% if auth_user.is_authenticated %}
+        <div id="user-center">
+            <a id="user" href="{% url "blog:post_list" auth_user.id %}">
+            {{ auth_user.profile.nickname|title }}
+            </a
+            <!--首页暂时充当个人中心，后续添加-->
+            <a id="center" href="{% url "blog:post_list" auth_user.id %}">
+            个人中心
+            </a>
+        </div>
+
+        <a href="{% url 'blog:user_logout' %}">
+            <div id="logout">退出</div>
+        </a>
+
     {% else %}
-        <button id="login" name="login" onclick="javascrtpt:window.location.href='{% url 'blog:user_login' %}'">
-            你好,请登录
-        </button>
-        <button id="register" name="register" onclick="javascrtpt:window.location.href='{% url 'blog:user_register' %}'">
-            注册
-        </button>
+
+        <a href="{% url 'blog:user_login' %}">
+            <div id="login">你好,请登录</div>
+        </a>
+
+        <a href="{% url 'blog:user_register' %}">
+            <div id="register">注册</div>
+        </a>
+
     {% endif %}
     </div>
 </div>

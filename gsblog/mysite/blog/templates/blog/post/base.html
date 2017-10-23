@@ -1,5 +1,5 @@
 {% extends "blog/base.html" %}
 
 {% block sidebar %}
-    {% include "blog/post/sidebar.html" %}
+    {% include "blog/post/sidebar.html" with user=user auth_user=auth_user %}
 {% endblock %}

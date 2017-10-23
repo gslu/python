@@ -6,7 +6,31 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from taggit.managers import TaggableManager
+from system.storage import ImageStorage
+
 # Create your models here.
+
+class Profile(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    nickname = models.CharField(verbose_name=u"昵称",max_length=20,blank=True,default=u"未名")
+
+    GENDER_CHOICES = (
+        (u'M', u'男'),
+        (u'F', u'女'),
+        (u'S',u'保密'),
+    )
+    gender = models.CharField(verbose_name=u"性别",max_length=10,choices=GENDER_CHOICES,default='S')
+    motto = models.CharField(verbose_name=u"座右铭",max_length=50,blank=True,default="色即是空，空即是色")
+    introduce = models.CharField(verbose_name=u"个人简介",max_length=300,blank=True)
+    phone = models.CharField(verbose_name=u"手机",max_length=30,blank=True)
+    image = models.ImageField(verbose_name=u"头像",upload_to="image/user_img",
+                              blank=True,storage=ImageStorage())
+    bgimg = models.ImageField(verbose_name=u"背景", upload_to="image/bg_img",
+                              blank=True, storage=ImageStorage())
+
+    def __unicode__(self):
+        return self.user.username
+
 
 class PublishedManager(models.Manager):
     def get_queryset(self):

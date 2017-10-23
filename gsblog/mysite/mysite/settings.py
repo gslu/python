@@ -64,11 +64,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
 ]
-
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
@@ -144,3 +144,7 @@ EMAIL_USE_TLS = True
 # ImageField
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 MEDIA_URL = "/media/"
+
+
+#login url
+LOGIN_URL = '/login/'

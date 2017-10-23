@@ -7,6 +7,7 @@ from django.shortcuts import render, get_object_or_404
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, EmptyPage,PageNotAnInteger
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.views.generic import ListView
@@ -31,13 +32,21 @@ def userLogin(request):
             if user is not None:
                 login(request, user)
                 login_status = 200
-                return HttpResponseRedirect(request.META.get('REFERER', '/'))
+
+                return HttpResponseRedirect(request.session['login_from'])
             else:
                 login_status = 400
                 form = LoginForm(initial={"username": cd["username"],
                                                 "password": cd["password"]})
 
     else:
+        # 获取不到,则跳转到个人中心，用/user/1/暂时充当
+        referer = request.META.get('HTTP_REFERER','/user/1')
+        if 'register' not in referer:
+            request.session['login_from'] = referer
+        else:
+            request.session['login_from'] = '/user/1'
+
         form = LoginForm()
 
 
@@ -45,7 +54,7 @@ def userLogin(request):
                                              "login_status":login_status,
                                              "type":"login"})
 
-
+@login_required
 def userLogout(request):
     logout(request)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
@@ -74,7 +83,7 @@ def userRegister(request):
                     else:
                         register_msg = "Server error"
                 else:
-                    return HttpResponseRedirect(request.META.get('REFERER', '/'))
+                    return HttpResponseRedirect('/login/')
             else:
                 register_msg="该帐号已被注册"
                 form = RegisterForm(initial={"username": cd["username"],
@@ -89,16 +98,10 @@ def userRegister(request):
                                              "register_msg":register_msg,
                                              "type": "register"})
 
+def post_list(request,user_id,tag_slug=None):
 
-
-class PostListView(ListView):
-    queryset = Post.published.all()
-    context_object_name = 'posts'
-    paginate_by = 6
-    template_name = 'blog/post/list.html'
-
-def post_list(request,tag_slug=None):
-    object_list = Post.published.all()
+    user = get_object_or_404(User,id=user_id)
+    object_list = Post.published.filter(author=user)
     tag = None
     if tag_slug:
         tag = get_object_or_404(Tag,slug=tag_slug)
@@ -117,7 +120,9 @@ def post_list(request,tag_slug=None):
     return render(request,'blog/post/list.html',{'posts': posts,
                                                  'page':page,
                                                  'tag':tag,
-                                                 'user':request.user})
+                                                 'user':user,
+                                                 'auth_user':request.user})
+
 
 def post_detail(request,year,month,day,slug,id):
     post = get_object_or_404(Post, slug=slug,status='published',publish__year=year,
@@ -156,7 +161,10 @@ def post_detail(request,year,month,day,slug,id):
                                                    'comments':comments,
                                                    'comment_form':comment_form,
                                                    'new_comment':new_comment,
-                                                   'similar_posts':similar_posts})
+                                                   'similar_posts':similar_posts,
+                                                   'user': post.author,
+                                                   'auth_user': request.user
+                                                   })
 
 def post_share(request,post_id):
     # Retrieve post by id
@@ -185,9 +193,15 @@ def post_share(request,post_id):
             sent = True
     else:
         form = EmailPostForm()
-    return render(request,'blog/post/share.html',{'form':form,'post':post,'sent':sent,'cd':cd})
+    return render(request,'blog/post/share.html',{'form':form,'post':post,
+                                                  'sent':sent,'cd':cd,
+                                                  'user': post.author,
+                                                  'auth_user': request.user
+                                                  })
 
 
-def music(request):
-    return render(request,'blog/music/music.html',{})
+def music(request,user_id):
+    user = get_object_or_404(User, id=user_id)
+    return render(request,'blog/music/music.html',{'user': user,
+                                                   'auth_user': request.user})
 

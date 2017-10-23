@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="icon" href='{% static "media/image/picture.ico" %}' type="image/x-icon"/>
+        <link rel="icon" href='{% static "blog/img/picture.ico" %}' type="image/x-icon"/>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>
         {% ifequal type "login" %}
@@ -18,7 +18,7 @@
 
     <body class="login">
         <div id="text">
-            <a id="tohome" href='{% url "blog:post_list" %}'>浮文掠影</a>
+            <a id="tohome" href=''>浮文掠影</a>
         </div>
 
         {% ifequal type "login" %}
